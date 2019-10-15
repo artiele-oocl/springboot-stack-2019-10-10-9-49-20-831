@@ -12,8 +12,8 @@ import java.util.logging.Logger;
  * Created by jxzhong on 18/08/2017.
  */
 @RestController
-@RequestMapping("/hello")
-public class HelloResource {
+@RequestMapping("/employees")
+public class EmployeeController {
 
     private final Logger log = Logger.getLogger(this.getClass().getName());
 
