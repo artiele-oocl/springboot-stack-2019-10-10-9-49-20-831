@@ -5,9 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -33,28 +33,19 @@ public class EmployeeController {
         employeeList.add(employee);
         return ResponseEntity.ok(employee);
     }
-
     @PutMapping("/{id}")
     public ResponseEntity<Employee> updateEmployeeInfo(@PathVariable Long id, @RequestBody Employee employee) {
-        for (Employee employeeDB : employeeList) {
-            if (employeeDB.getId().equals(id)) {
-                employeeDB.setName(employee.getName());
-                employeeDB.setAge(employee.getAge());
-                employeeDB.setGender(employee.getGender());
-            }
-        }
+        Employee employeeDB = employeeList.stream().filter(f-> f.getId().equals(id)).findFirst().get();
+        employeeDB.setName(employee.getName());
+        employeeDB.setAge(employee.getAge());
+        employeeDB.setGender(employee.getGender());
         return ResponseEntity.ok(employee);
     }
-
     @DeleteMapping("/{id}")
     public String deleteEmployeeById(@PathVariable Long id) {
-        for (Employee employee : employeeList) {
-            if (employee.getId().equals(id)) {
-                employeeList.remove(employee);
-                ResponseEntity.ok().build();
-            }
-        }
-        return "Employee successfully deleted.";
+        Employee employee = employeeList.stream().filter(f-> f.getId().equals(id)).findFirst().get();
+        employeeList.remove(employee);
+        return "Resource deleted.";
     }
 
 }
