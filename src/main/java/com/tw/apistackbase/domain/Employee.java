@@ -1,7 +1,9 @@
 package com.tw.apistackbase.domain;
 
+import java.util.Objects;
+
 public class Employee {
-    private Integer id;
+    private Long id;
     private String name;
     private Integer age;
     private String gender;
@@ -9,11 +11,11 @@ public class Employee {
     public Employee() {
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
